@@ -56,7 +56,7 @@ async function loginController(req, res) {
   const { username, email, password } = req.body;
   const user = await userModel.findOne({
     $or: [{ email: email }, { username: username }],
-  });
+  }).select("+password");
 
   if (!user) {
     return res.status(404).json({ message: "User not found" });
@@ -100,8 +100,8 @@ async function getMeController(req, res) {
   }
   res.status(200).json({
     user: {
-      username: user.username
-      , email: user.email,
+      username: user.username ,
+      email: user.email,
       bio: user.bio,
       profilePic: user.profilePic,
     },

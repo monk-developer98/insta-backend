@@ -11,9 +11,11 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "user",
     required: [ true, "Post owner is required" ],
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Post', postSchema);
+const postModel = mongoose.model('Post', postSchema);
+
+module.exports = postModel;
